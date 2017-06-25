@@ -1,1 +1,53 @@
 
+// Box Model
+ @mixin boxModel($x) {
+	*, *:before, *:after {
+		-webkit-box-sizing: #{$x};
+		-moz-box-sizing: #{$x};
+		-o-box-sizing: #{$x};
+		box-sizing: #{$x};
+	}
+}
+
+
+
+@mixin Generate_Class($column-number, $key){
+  @for $i from 1 through $column-number {
+      .#{$key}-#{$i}{
+      width:100% / $column-number * $i;
+    }
+  }
+}
+
+
+
+// Main Grig Mixin 
+@mixin grid($boxModel, $column-number, $breakpoints){
+  @if $boxModel == true {
+    @include boxModel('border-box');
+  }
+  
+  @each  $key, $value  in ($breakpoints){
+    @media #{$value}{
+      @include  Generate_Class($column-number, $key)
+    }
+  }
+
+  
+}
+
+
+
+// Grid Set Up 
+@include grid(
+  $boxModel: true,
+  $column-number:12,
+  $breakpoints:(
+  lg: '(max-width:1200px)',
+  md:'(min-width:780px)'
+  )
+);
+
+
+
+
