@@ -49,5 +49,20 @@
 );
 
 
+// containers 
+@mixin containers($width) {
+  
+  // Modifiers.
+  .container .full		{ width: 100%; max-width: $width * 1.25; min-width: $width; }
+  .container .thirds			{ width: $width * 0.75; }
+  .container .helf			{ width: $width * 0.5; }
+  .container .quarter			{ width: $width * 0.25; }
+  
+  // Main class.
+  .container {
+  		width: $width ;
+  	}
+}
+
 
 
